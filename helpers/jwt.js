@@ -11,7 +11,8 @@ module.exports = {
 
             JWT.sign(payload, secret, options, (err, token) => {
                 if (err) {
-                    rej(err)
+                    console.log(err.message);
+                    rej(createError.InternalServerError())
                 } else {
                     res(token)
                 }

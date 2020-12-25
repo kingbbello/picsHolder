@@ -2,6 +2,12 @@ GET http://localhost:3030
 
 ####Login
 POST http://localhost:3030/auth/login
+Content-Type: application/json
+
+{
+    "email": "someemail3e@gmail.com",
+    "password": "12345678"
+}
 
 ####register
 POST http://localhost:3030/auth/register
