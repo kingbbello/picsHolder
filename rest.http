@@ -1,0 +1,13 @@
+GET http://localhost:3030
+
+####Login
+POST http://localhost:3030/auth/login
+
+####register
+POST http://localhost:3030/auth/register
+
+####refresh
+POST http://localhost:3030/auth/refresh-token
+
+####logout
+DELETE http://localhost:3030/auth/logout
