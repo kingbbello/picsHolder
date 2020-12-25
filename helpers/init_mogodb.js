@@ -7,6 +7,7 @@ mongoose.connect(`mongodb+srv://bsgCans:${password}@cluster0.hxeaw.mongodb.net/$
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
+    useCreateIndex: true
 }).then(() => {
     console.log('mongodb connected');
 }).catch(err => {
