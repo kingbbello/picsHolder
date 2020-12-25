@@ -1,5 +1,6 @@
 GET http://localhost:3030
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDg5MDg4MzEsImV4cCI6MTYwODkwODg0NiwiYXVkIjoiNWZlNTZiNmQzZWEwOWU0NGJjODJjZmI0IiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.j1r0-ScX9xcssEtSm7-DVLwbk4jHJpjjxV5Cmh8lOcI
+
 ####Login
 POST http://localhost:3030/auth/login
 Content-Type: application/json
@@ -14,7 +15,7 @@ POST http://localhost:3030/auth/register
 Content-Type: application/json
 
 {
-    "email": "someemail3e@gmail.com",
+    "email": "someemail3new@gmail.com",
     "password": "12345678"
 }
 
