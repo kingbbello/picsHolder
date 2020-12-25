@@ -7,7 +7,7 @@ module.exports = {
         return new Promise((res, rej) => {
             const payload = {}
             const secret = process.env.ACCESS_TOKEN_SECRET
-            const options = { expiresIn: "2s", issuer: "pickurpage.com", audience: userId }
+            const options = { expiresIn: "15s", issuer: "pickurpage.com", audience: userId }
 
             JWT.sign(payload, secret, options, (err, token) => {
                 if (err) {
@@ -29,7 +29,14 @@ module.exports = {
 
         JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
             if (err) {
-                return next(createError.Unauthorized())
+                // if (err.name === 'JsonWebTokenError') {
+                //     return next(createError.Unauthorized())
+                // } else {
+                //     return next(createError.Unauthorized(err.message))
+                // }
+                const message = err.name === 'JsonWebTokenError' ? 'Unauthorized' : err.message
+                return next(createError.Unauthorized(message))
+
             } else {
                 req.payload = payload
                 next()

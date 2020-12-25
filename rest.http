@@ -1,6 +1,5 @@
 GET http://localhost:3030
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDg4NzUwMTMsImV4cCI6MTYwODg3NTAxNSwiYXVkIjoiNWZlNTZiNmQzZWEwOWU0NGJjODJjZmI0IiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.wYgSyA9WFuGNsL2nTNaj4g0Pe5Pqm047sWwGn-ZQfI8
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDg5MDg4MzEsImV4cCI6MTYwODkwODg0NiwiYXVkIjoiNWZlNTZiNmQzZWEwOWU0NGJjODJjZmI0IiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.j1r0-ScX9xcssEtSm7-DVLwbk4jHJpjjxV5Cmh8lOcI
 ####Login
 POST http://localhost:3030/auth/login
 Content-Type: application/json
