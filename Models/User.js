@@ -26,15 +26,6 @@ userSchema.pre('save', async function(next) {
     }
 })
 
-
-// userSchema.post('save', async function(next) {
-//     try {
-//         console.log('called after saving');
-//     } catch (error) {
-//         next(error)
-//     }
-// })
-
 const User = mongoose.model('user', userSchema)
 
 module.exports = User
