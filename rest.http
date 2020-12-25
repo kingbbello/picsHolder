@@ -1,4 +1,5 @@
 GET http://localhost:3030
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDg4NzUwMTMsImV4cCI6MTYwODg3NTAxNSwiYXVkIjoiNWZlNTZiNmQzZWEwOWU0NGJjODJjZmI0IiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.wYgSyA9WFuGNsL2nTNaj4g0Pe5Pqm047sWwGn-ZQfI8
 
 ####Login
 POST http://localhost:3030/auth/login

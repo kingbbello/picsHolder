@@ -5,6 +5,7 @@ const AuthRoute = require('./Routes/Auth.route')
 
 require('dotenv').config()
 require('./helpers/init_mogodb')
+const { verifyAccessToken } = require('./helpers/jwt')
 
 const app = express()
 
@@ -12,7 +13,8 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.get("/", async(req, res, next) => {
+app.get("/", verifyAccessToken, async(req, res, next) => {
+
     res.send('Hello')
 })
 
