@@ -7,7 +7,7 @@ module.exports = {
         return new Promise((res, rej) => {
             const payload = {}
             const secret = process.env.ACCESS_TOKEN_SECRET
-            const options = { expiresIn: "15s", issuer: "pickurpage.com", audience: userId }
+            const options = { expiresIn: "20s", issuer: "pickurpage.com", audience: userId }
 
             JWT.sign(payload, secret, options, (err, token) => {
                 if (err) {
@@ -51,6 +51,22 @@ module.exports = {
                     rej(createError.InternalServerError())
                 } else {
                     res(token)
+                }
+            })
+        })
+    },
+
+    verifyRefreshToken: (refreshToken) => {
+        return new Promise((res, rej) => {
+            const secret = process.env.REFRESH_TOKEN_SECRET
+
+            JWT.verify(refreshToken, secret, (err, payload) => {
+                if (err) {
+                    console.log(err.message);
+                    rej(createError.Unauthorized())
+                } else {
+                    const userId = payload.aud
+                    res(userId)
                 }
             })
         })

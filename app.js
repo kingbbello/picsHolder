@@ -14,16 +14,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.get("/", verifyAccessToken, async(req, res, next) => {
-
     res.send('Hello')
 })
 
 app.use('/auth', AuthRoute)
 
 app.use(async(req, res, next) => {
-    // const error = new Error("Not found")
-    // error.status = 404
-    // next(error)
     next(createError.NotFound("This route does not exists"))
 })
 
