@@ -1,6 +1,6 @@
 const JWT = require('jsonwebtoken')
 const createError = require('http-errors')
-
+const client = require('./redis')
 
 module.exports = {
     signAccessToken: (userId) => {
@@ -50,7 +50,14 @@ module.exports = {
                     console.log(err.message);
                     rej(createError.InternalServerError())
                 } else {
-                    res(token)
+                    client.SET(userId, token, 'EX', 365 * 24 * 60 * 60, (err, reply) => {
+                        if (err) {
+                            console.log(err.message);
+                            rej(createError.InternalServerError())
+                            return;
+                        }
+                        res(token)
+                    })
                 }
             })
         })
@@ -66,7 +73,20 @@ module.exports = {
                     rej(createError.Unauthorized())
                 } else {
                     const userId = payload.aud
-                    res(userId)
+
+                    client.get(userId, (err, res) => {
+                        if (err) {
+                            console.log(err.message);
+                            rej(createError.InternalServerError())
+                            return;
+                        } else {
+                            if (refreshToken === res) {
+                                res(userId)
+                            } else {
+                                rej(createError.Unauthorized())
+                            }
+                        }
+                    })
                 }
             })
         })

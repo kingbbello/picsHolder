@@ -47,6 +47,7 @@ router.post('/login', async(req, res, next) => {
 
         const accessToken = await signAccessToken(user.id)
         const refreshToken = await refreshAccessToken(user.id)
+        console.log({ accessToken, refreshToken });
         res.send({ accessToken, refreshToken })
     } catch (error) {
         if (error.isJoi === true) {

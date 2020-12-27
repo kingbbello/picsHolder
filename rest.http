@@ -30,3 +30,8 @@ Content-Type: application/json
 
 ####logout
 DELETE http://localhost:3030/auth/logout
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDg5MTUzNTAsImV4cCI6MTY0MDQ3Mjk1MCwiYXVkIjoiNWZlNTZiNmQzZWEwOWU0NGJjODJjZmI0IiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.baD7UZxe3mvup74Ezo7xgobHw9-vksIsCj7tOj-J3RI"
+}
