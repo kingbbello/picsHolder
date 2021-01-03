@@ -7,7 +7,7 @@ const client = redis.createClient({
 })
 
 client.on('connect', () => {
-    console.log('Client got connected');
+    console.log('Client got connected', new Date().toLocaleTimeString());
 })
 
 client.on('error', (err) => {
@@ -19,7 +19,7 @@ client.on('ready', () => {
 })
 
 client.on('end', () => {
-    console.log('Client got disconnected');
+    console.log('Client got disconnected', new Date().toLocaleTimeString());
 })
 
 process.on('SIGINT', () => {
