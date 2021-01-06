@@ -48,11 +48,14 @@ module.exports = {
     },
 
     delete: (req, res) => {
-        gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+        const token = req.headers['authorization'].split(' ')[1]
+        const { aud } = JWT.decode(token)
+
+        gfs.remove({ userID: aud, _id: req.body.id, root: 'uploads' }, (err, gridStore) => {
             if (err) {
                 return res.status(404).json({ err: err });
             }
-            res.redirect('/');
+            res.send('Deleted');
         });
     },
 

@@ -13,6 +13,7 @@ $('#btn-register').click(() => {
             success: data => {
                 accessToken = data.accessToken
                 refreshToken = data.refreshToken
+                fetchImage()
             }
         })
     }
@@ -97,7 +98,7 @@ const fetchImage = () => {
                     if (file.isImage) {
                         images += `<img src="api/image/${file.filename}">`
                     }
-                    images += `<button class="btn btn-danger btn-block mt-4">Delete</button>`
+                    images += '<button onClick=' + `"remove('${file._id}')"` + 'class="btn btn-danger btn-block mt-4">Delete</button>'
                     images += '</div>'
                 }
             } else {
@@ -105,13 +106,29 @@ const fetchImage = () => {
             }
 
             if ($('#images').length > 0) {
-                $('#images').children().empty()
+                $('#images').empty()
             }
             $('#images').append(images)
-            console.log(data.files.length);
+            console.log(data.files);
         },
         failure: err => {
             console.log('error ', err);
+        }
+    })
+}
+
+const remove = file => {
+    $.ajax({
+        type: 'DELETE',
+        url: '/api/remove',
+        data: {
+            id: file
+        },
+        headers: {
+            "Authorization": `Bearer ${accessToken}`
+        },
+        success: data => {
+            console.log(data);
         }
     })
 }

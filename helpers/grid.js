@@ -21,14 +21,13 @@ const storage = new GridFsStorage({
                 const filename = buf.toString('hex') + path.extname(file.originalname)
                 const fileInfo = {
                     filename: filename,
-                    bucketName: 'uploads',
-                    stuff: 'i wrote this'
+                    bucketName: 'uploads'
                 }
                 resolve(fileInfo)
             })
         })
     },
-    options: { useUnifiedTopology: true }
+    options: { useUnifiedTopology: true, useCreateIndex: true }
 })
 
 const upload = multer({ storage })
