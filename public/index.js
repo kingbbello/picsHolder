@@ -32,7 +32,7 @@ $('#btn-login').click(() => {
             success: data => {
                 accessToken = data.accessToken
                 refreshToken = data.refreshToken
-                console.log(data);
+                    // console.log(data);
 
                 fetchImage()
             }
@@ -109,7 +109,7 @@ const fetchImage = () => {
                 $('#images').empty()
             }
             $('#images').append(images)
-            console.log(data.files);
+                // console.log(data.files);
         },
         failure: err => {
             console.log('error ', err);
@@ -131,4 +131,5 @@ const remove = file => {
             console.log(data);
         }
     })
+    location.reload()
 }
