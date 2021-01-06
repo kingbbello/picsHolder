@@ -11,6 +11,7 @@ const password = process.env.password
 const storage = new GridFsStorage({
     url: `mongodb+srv://bsgCans:${password}@cluster0.hxeaw.mongodb.net/${dbName}?retryWrites=true&w=majority`,
     file: (req, file) => {
+        console.log(req.body);
         return new Promise((resolve, reject) => {
             crypto.randomBytes(8, (err, buf) => {
                 if (err) {
@@ -26,7 +27,8 @@ const storage = new GridFsStorage({
                 resolve(fileInfo)
             })
         })
-    }
+    },
+    options: { useUnifiedTopology: true }
 })
 
 const upload = multer({ storage })

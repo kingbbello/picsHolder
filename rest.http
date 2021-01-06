@@ -1,5 +1,6 @@
 GET http://localhost:3030
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDk2NDU0NDMsImV4cCI6MTYwOTY0OTA0MywiYXVkIjoiNWZlNTZiNmQzZWEwOWU0NGJjODJjZmI0IiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.RN9sN1lKAe436iOtjpY7re3NXW7OoY3nnjsW-VEn5fw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDk4ODk4OTIsImV4cCI6MTYwOTg5MzQ5MiwiYXVkIjoiNWZlNTZiNmQzZWEwOWU0NGJjODJjZmI0IiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.dbcsaGXDpMPEDE0a6ER8LlfjRX57UmByclf77aRC2f4
+
 
 ####Login
 POST http://localhost:3030/auth/login
@@ -11,11 +12,11 @@ Content-Type: application/json
 }
 
 ####register
-POST http://localhost:3030/auth/register
+POST http://localhost:3030/api/upload
 Content-Type: application/json
 
 {
-    "email": "someemail3new@gmail.com",
+    "email": "someema3new@gmail.com",
     "password": "12345678"
 }
 

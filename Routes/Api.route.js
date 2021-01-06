@@ -5,7 +5,7 @@ const { verifyAccessToken } = require('../helpers/jwt')
 const express = require("express")
 const router = express.Router()
 
-router.post('/upload', upload.single('file'), ApiController.upload)
+router.post('/upload', verifyAccessToken, upload.single('file'), ApiController.upload)
 
 router.get('/', ApiController.main)
 
