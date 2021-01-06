@@ -21,6 +21,7 @@
                 <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                     <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
                     <li class="dropdown order-1">
+                        <button type="button" id="btn-logout" class="btn btn-outline-danger">Logout</button>
                         <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login/Register <span class="caret"></span></button>
                         <ul class="dropdown-menu dropdown-menu-right mt-2">
                             <li class="px-3 py-2">
@@ -60,7 +61,7 @@
                         <input type="file" name="file" id="file" class="custom-file-input">
                         <label for="file" class="custom-file-label">Choose File</label>
                     </div>
-                    <input id="btnSubmit" type="submit" value="Submit" class="btn btn-primary btn-block">
+                    <input id="btnSubmit" type="submit" value="upload" class="btn btn-primary btn-block" disabled>
                 </form>
                 <div id="images" style="margin-top: 30px;">
 

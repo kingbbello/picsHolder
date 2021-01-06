@@ -11,6 +11,6 @@ router.post('/upload', verifyAccessToken, upload.single('file'), ApiController.u
 
 router.get('/', ApiController.main)
 
-router.delete('/remove', verifyAccessToken, ApiController.delete)
+router.delete('/delete', verifyAccessToken, ApiController.delete)
 
 module.exports = router

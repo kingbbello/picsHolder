@@ -1,6 +1,17 @@
 let accessToken = ''
 let refreshToken = ''
 
+$.ajax({
+    type: 'GET',
+    url: '/auth/',
+    success: data => {
+        if (data) {
+            accessToken = data
+            fetchImage()
+        }
+    }
+})
+
 $('#btn-register').click(() => {
     if ($('#emailInput')[0].value.length > 0 && $('#passwordInput')[0].value.length > 0) {
         $.ajax({
@@ -38,6 +49,21 @@ $('#btn-login').click(() => {
             }
         })
     }
+
+})
+
+$('#btn-logout').click(() => {
+    $.ajax({
+        type: 'DELETE',
+        url: '/auth/logout',
+        data: {
+            refreshToken: refreshToken
+        },
+        success: data => {
+            accessToken = data
+            location.reload()
+        }
+    })
 
 })
 
@@ -91,6 +117,7 @@ const fetchImage = () => {
             "Authorization": `Bearer ${accessToken}`
         },
         success: data => {
+            $('#btnSubmit')[0].disabled = false
             let images = ''
             if (data.files) {
                 for (let file of data.files) {
@@ -120,7 +147,7 @@ const fetchImage = () => {
 const remove = file => {
     $.ajax({
         type: 'DELETE',
-        url: '/api/remove',
+        url: '/api/delete',
         data: {
             id: file
         },
@@ -128,8 +155,7 @@ const remove = file => {
             "Authorization": `Bearer ${accessToken}`
         },
         success: data => {
-            console.log(data);
+            fetchImage()
         }
     })
-    location.reload()
 }
