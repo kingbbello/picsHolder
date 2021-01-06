@@ -32,6 +32,8 @@ $('#btn-login').click(() => {
                 accessToken = data.accessToken
                 refreshToken = data.refreshToken
                 console.log(data);
+
+                fetchImage()
             }
         })
     }
@@ -71,7 +73,7 @@ $("#btnSubmit").click(function(event) {
             // $("#result").text(data);
             console.log("SUCCESS : ");
             // $("#btnSubmit").prop("disabled", false);
-
+            fetchImage()
         },
         error: function(e) {
             console.log("ERROR : ", e);
@@ -79,3 +81,37 @@ $("#btnSubmit").click(function(event) {
     });
 
 });
+
+const fetchImage = () => {
+    $.ajax({
+        type: 'GET',
+        url: '/api/',
+        headers: {
+            "Authorization": `Bearer ${accessToken}`
+        },
+        success: data => {
+            let images = ''
+            if (data.files) {
+                for (let file of data.files) {
+                    images += '<div class="card card-body mb-3">'
+                    if (file.isImage) {
+                        images += `<img src="api/image/${file.filename}">`
+                    }
+                    images += `<button class="btn btn-danger btn-block mt-4">Delete</button>`
+                    images += '</div>'
+                }
+            } else {
+                images += '<p> No images to show</p>'
+            }
+
+            if ($('#images').length > 0) {
+                $('#images').children().empty()
+            }
+            $('#images').append(images)
+            console.log(data.files.length);
+        },
+        failure: err => {
+            console.log('error ', err);
+        }
+    })
+}
