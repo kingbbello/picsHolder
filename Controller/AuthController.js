@@ -4,7 +4,6 @@ const { authSchema } = require('../helpers/validationSchema')
 const { signAccessToken, refreshAccessToken, verifyRefreshToken } = require('../helpers/jwt')
 const { response } = require("express")
 const client = require('../helpers/redis')
-let token = ''
 
 module.exports = {
     register: async(req, res, next) => {
@@ -22,7 +21,6 @@ module.exports = {
             const accessToken = await signAccessToken(savedUser.id)
             const refreshToken = await refreshAccessToken(savedUser.id)
 
-            token = accessToken
             res.send({ accessToken, refreshToken })
         } catch (error) {
             if (error.isJoi === true) {
@@ -50,7 +48,6 @@ module.exports = {
             const accessToken = await signAccessToken(user.id)
             const refreshToken = await refreshAccessToken(user.id)
 
-            token = accessToken
             res.send({ accessToken, refreshToken })
         } catch (error) {
             if (error.isJoi === true) {
@@ -71,7 +68,6 @@ module.exports = {
             const accessToken = await signAccessToken(userId)
             const newRefreshToken = await refreshAccessToken(userId)
 
-            token = accessToken
             res.send({ accessToken, newRefreshToken })
         } catch (error) {
             next(error)
@@ -92,15 +88,10 @@ module.exports = {
                     throw createError.InternalServerError()
                 }
                 console.log(value);
-                token = ''
                 res.sendStatus(204)
             })
         } catch (err) {
             next(err)
         }
     },
-
-    check: (req, res) => {
-        res.send(token)
-    }
 }
