@@ -7,7 +7,7 @@ const client = require('../helpers/redis')
 
 module.exports = {
     register: async(req, res, next) => {
-        console.log(req.body);
+        // console.log(req.body);
         try {
             const result = await authSchema.validateAsync(req.body)
 
@@ -87,7 +87,7 @@ module.exports = {
                     console.log(err.message);
                     throw createError.InternalServerError()
                 }
-                console.log(value);
+                // console.log(value);
                 res.sendStatus(204)
             })
         } catch (err) {

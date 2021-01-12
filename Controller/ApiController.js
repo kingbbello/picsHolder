@@ -19,7 +19,7 @@ module.exports = {
         const token = req.headers['authorization'].split(' ')[1]
         const { aud } = JWT.decode(token)
 
-        console.log(aud);
+        // console.log(aud);
         mongoose.connection.db.collection('uploads.files', (err, collection) => {
             collection.findOneAndUpdate({ filename: req.file.filename }, { $set: { userID: aud } }, { upsert: true })
         })
