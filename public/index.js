@@ -1,7 +1,3 @@
-console.log(localStorage.getItem('accessToken'));
-
-
-
 $('#btn-register').click(() => {
     if ($('#emailInput')[0].value.length > 0 && $('#passwordInput')[0].value.length > 0) {
         $.ajax({
@@ -14,12 +10,13 @@ $('#btn-register').click(() => {
             success: data => {
                 localStorage.setItem('accessToken', data.accessToken)
                 localStorage.setItem('refreshToken', data.refreshToken)
-                console.log(localStorage.getItem('accessToken'));
                 fetchImage()
+            },
+            failure: () => {
+                alert('something went wrong! Please try again')
             }
         })
     }
-
 })
 
 $('#btn-login').click(() => {
@@ -32,14 +29,16 @@ $('#btn-login').click(() => {
                 password: $('#passwordInput')[0].value
             },
             success: data => {
+                // console.log(data);
                 localStorage.setItem('accessToken', data.accessToken)
                 localStorage.setItem('refreshToken', data.refreshToken)
-                    // console.log(data);
                 fetchImage()
+            },
+            failure: () => {
+                alert('something went wrong! Please try again')
             }
         })
     }
-
 })
 
 $('#btn-logout').click(() => {
@@ -54,26 +53,14 @@ $('#btn-logout').click(() => {
             location.reload()
         }
     })
-
 })
 
 $("#btnSubmit").click(function(event) {
-
-    //stop submit the form, we will post it manually.
     event.preventDefault();
 
-    // Get form
     var form = $('#fileUploadForm')[0];
 
-    // Create an FormData object 
     var data = new FormData(form);
-
-    // If you want to add an extra field for the FormData
-    // data.append("CustomField", "This is some extra data, testing");
-
-    // disabled the submit button
-    // $("#btnSubmit").prop("disabled", true);
-
     $.ajax({
         type: "POST",
         url: "/api/upload",
@@ -86,10 +73,6 @@ $("#btnSubmit").click(function(event) {
         },
         timeout: 600000,
         success: function(data) {
-
-            // $("#result").text(data);
-            console.log("SUCCESS : ");
-            // $("#btnSubmit").prop("disabled", false);
             fetchImage()
         },
         error: function(e) {

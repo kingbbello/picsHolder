@@ -4,9 +4,13 @@ const mongoose = require('mongoose')
 const conn = require('../helpers/init_mogodb');
 
 let gfs;
+let gridFSBucket;
 
 conn.once('open', () => {
     gfs = Grid(conn.db, mongoose.mongo)
+    gridFSBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+        bucketName: 'uploads'
+    });
     gfs.collection('uploads')
 })
 
@@ -70,7 +74,7 @@ module.exports = {
             // Check if image
             if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
                 // Read output to browser
-                const readstream = gfs.createReadStream(file.filename);
+                const readstream = gridFSBucket.openDownloadStream(file._id);
                 readstream.pipe(res);
             } else {
                 res.status(404).json({
