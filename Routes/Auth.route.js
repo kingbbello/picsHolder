@@ -11,5 +11,4 @@ router.post('/refresh-token', AuthController.refresh)
 
 router.delete('/logout', AuthController.logout)
 
-
 module.exports = router

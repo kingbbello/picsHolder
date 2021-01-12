@@ -1,16 +1,6 @@
-let accessToken = ''
-let refreshToken = ''
+console.log(localStorage.getItem('accessToken'));
 
-$.ajax({
-    type: 'GET',
-    url: '/auth/',
-    success: data => {
-        if (data) {
-            accessToken = data
-            fetchImage()
-        }
-    }
-})
+
 
 $('#btn-register').click(() => {
     if ($('#emailInput')[0].value.length > 0 && $('#passwordInput')[0].value.length > 0) {
@@ -22,8 +12,9 @@ $('#btn-register').click(() => {
                 password: $('#passwordInput')[0].value
             },
             success: data => {
-                accessToken = data.accessToken
-                refreshToken = data.refreshToken
+                localStorage.setItem('accessToken', data.accessToken)
+                localStorage.setItem('refreshToken', data.refreshToken)
+                console.log(localStorage.getItem('accessToken'));
                 fetchImage()
             }
         })
@@ -41,10 +32,9 @@ $('#btn-login').click(() => {
                 password: $('#passwordInput')[0].value
             },
             success: data => {
-                accessToken = data.accessToken
-                refreshToken = data.refreshToken
+                localStorage.setItem('accessToken', data.accessToken)
+                localStorage.setItem('refreshToken', data.refreshToken)
                     // console.log(data);
-
                 fetchImage()
             }
         })
@@ -57,7 +47,7 @@ $('#btn-logout').click(() => {
         type: 'DELETE',
         url: '/auth/logout',
         data: {
-            refreshToken: refreshToken
+            refreshToken: localStorage.getItem('refreshToken')
         },
         success: data => {
             accessToken = data
@@ -92,7 +82,7 @@ $("#btnSubmit").click(function(event) {
         contentType: false,
         cache: false,
         headers: {
-            "Authorization": `Bearer ${accessToken}`
+            "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
         },
         timeout: 600000,
         success: function(data) {
@@ -114,7 +104,7 @@ const fetchImage = () => {
         type: 'GET',
         url: '/api/',
         headers: {
-            "Authorization": `Bearer ${accessToken}`
+            "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
         },
         success: data => {
             $('#btnSubmit')[0].disabled = false
@@ -152,10 +142,13 @@ const remove = file => {
             id: file
         },
         headers: {
-            "Authorization": `Bearer ${accessToken}`
+            "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
         },
         success: data => {
             fetchImage()
         }
     })
+}
+if (localStorage.getItem('accessToken') !== null) {
+    fetchImage()
 }
