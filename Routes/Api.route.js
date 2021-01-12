@@ -13,4 +13,6 @@ router.get('/', ApiController.main)
 
 router.delete('/delete', verifyAccessToken, ApiController.delete)
 
+router.delete('/deleteAll', verifyAccessToken, ApiController.deleteAll)
+
 module.exports = router

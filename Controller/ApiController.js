@@ -54,12 +54,27 @@ module.exports = {
         const token = req.headers['authorization'].split(' ')[1]
         const { aud } = JWT.decode(token)
 
-        gfs.remove({ userID: aud, _id: req.body.id, root: 'uploads' }, (err, gridStore) => {
-            if (err) {
-                return res.status(404).json({ err: err });
+        gfs.files.find({ userID: aud }).toArray((err, files) => {
+            for (let file of files) {
+                if (file._id == req.body.id) {
+                    gridFSBucket.delete(file._id)
+                }
             }
-            res.send('Deleted');
         });
+        res.send('deleted')
+    },
+
+    deleteAll: (req, res) => {
+        const token = req.headers['authorization'].split(' ')[1]
+        const { aud } = JWT.decode(token)
+
+        gfs.files.find({ userID: aud }).toArray((err, files) => {
+            for (let file of files) {
+                gridFSBucket.delete(file._id)
+                console.log(file._id);
+            }
+        });
+        res.send('delete')
     },
 
     images: (req, res) => {

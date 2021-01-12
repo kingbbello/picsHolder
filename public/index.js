@@ -92,8 +92,11 @@ const fetchImage = () => {
         success: data => {
             $('#btnSubmit')[0].disabled = false
             let images = ''
+            images += '<div>'
+            images += '<button style="margin-bottom: 20px;" onClick=' + `"removeAll()"` + 'class="btn btn-danger btn-block mt-4">Delete All</button>'
+            images += '</div>'
             if (data.files) {
-                for (let file of data.files) {
+                for (let file of data.files.reverse()) {
                     images += '<div class="card card-body mb-3">'
                     if (file.isImage) {
                         images += `<img src="api/image/${file.filename}">`
@@ -101,6 +104,7 @@ const fetchImage = () => {
                     images += '<button onClick=' + `"remove('${file._id}')"` + 'class="btn btn-danger btn-block mt-4">Delete</button>'
                     images += '</div>'
                 }
+
             } else {
                 images += '<p> No images to show</p>'
             }
@@ -128,7 +132,20 @@ const remove = file => {
             "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
         },
         success: data => {
-            fetchImage()
+            location.reload()
+        }
+    })
+}
+
+const removeAll = () => {
+    $.ajax({
+        type: 'DELETE',
+        url: '/api/deleteAll',
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
+        },
+        success: data => {
+            location.reload()
         }
     })
 }
