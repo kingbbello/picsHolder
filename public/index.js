@@ -50,7 +50,7 @@ $('#btn-logout').click(() => {
             refreshToken: localStorage.getItem('refreshToken')
         },
         success: data => {
-            accessToken = data
+            localStorage.removeItem('accessToken')
             location.reload()
         }
     })
