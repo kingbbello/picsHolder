@@ -11,6 +11,5 @@ router.post('/refresh-token', AuthController.refresh)
 
 router.delete('/logout', AuthController.logout)
 
-router.get('/', AuthController.check)
 
 module.exports = router
