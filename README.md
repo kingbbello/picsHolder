@@ -14,17 +14,17 @@ npm install
 The following variables are required to run the app
 
 ## MongoDB
-# password={yourdbpassword}
-# dbname={yourdbname}
+* password={yourdbpassword}
+* dbname={yourdbname}
 
 ## Redis
-# REDIS_PORT={yourRedisPort}
-# REDIS_HOST={yourRedisHost}
-# REDIS_PASSWORD={yourRedisPassword}
+* REDIS_PORT={yourRedisPort}
+* REDIS_HOST={yourRedisHost}
+* REDIS_PASSWORD={yourRedisPassword}
 
 ## JWT
-# ACCESS_TOKEN_SECRET={yourRandomAccessTokenSecret}
-# REFRESH_TOKEN_SECRET={yourRandomRefreshTokenSecret}
+* ACCESS_TOKEN_SECRET={yourRandomAccessTokenSecret}
+* REFRESH_TOKEN_SECRET={yourRandomRefreshTokenSecret}
 
 ### 3. Running Server
 
